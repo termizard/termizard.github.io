@@ -1,7 +1,11 @@
+version: "3.9"
+
 services:
-  termizard-landing:
-    build: .
-    container_name: termizard-landing
-    ports:
-      - "8080:80"
-    restart: unless-stopped
+  build-static:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: termizard-build
+    volumes:
+      - ./dist:/result
+    command: ["sh", "-c", "cp -r /out/* /result"]
