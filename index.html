@@ -1,59 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
     <title>Termizard | PTY Emulator on Go</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;600;800&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="assets/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+            href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;600;800&display=swap"
+            rel="stylesheet"
+    />
 </head>
 <body>
-<div class="container">
-    <header>
-        <a href="#" class="logo">
-            <div class="logo-icon">🦎</div>
-            Termizard
-        </a>
-
-        <div style="display: flex; align-items: center; gap: 15px;">
-            <a href="https://github.com/termizard/termizard"
-               class="github-link"
-               target="_blank"
-               rel="noopener noreferrer">
-                GitHub
-            </a>
-
-            <div class="lang-switch">
-                <button data-lang="ru">RU</button>
-                <button data-lang="en">EN</button>
-                <button data-lang="de">DE</button>
-            </div>
-        </div>
-    </header>
-
-    <section class="hero">
-        <h1 id="hero-title"></h1>
-        <p id="hero-desc"></p>
-
-        <div class="terminal-window">
-            <div class="terminal-header">
-                <div class="dot red"></div>
-                <div class="dot yellow"></div>
-                <div class="dot green"></div>
-            </div>
-            <div class="terminal-body" id="terminal-body"></div>
-        </div>
-    </section>
-
-    <section class="features" id="features"></section>
-
-    <footer id="footer"></footer>
-</div>
-
-<script src="js/lang.js"></script>
-<script src="js/main.js"></script>
+<div id="root"></div>
+<script type="module" src="/src/main.tsx"></script>
 </body>
 </html>
