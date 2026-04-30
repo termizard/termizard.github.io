@@ -154,3 +154,18 @@ footer {
     color: #444;
     font-size: 0.9rem;
 }
+
+.github-link {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: 0.2s ease;
+}
+
+.github-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+}
