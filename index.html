@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termizard | Мощный PTY Эмулятор на Go</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0c;
+            --accent: #7d5fff;
+            --text: #e0e0e6;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header / Logo */
+        header {
+            padding: 40px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            box-shadow: 0 0 20px rgba(125, 95, 255, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 800;
+            margin: 0;
+            background: linear-gradient(to bottom, #fff 40%, #666);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #888;
+            max-width: 600px;
+            margin: 20px auto 40px;
+        }
+
+        /* Terminal Window Widget */
+        .terminal-window {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            background: var(--glass);
+            padding: 12px;
+            display: flex;
+            gap: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .red { background: #ff5f56; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #27c93f; }
+
+        .terminal-body {
+            padding: 25px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            color: #a9b7c6;
+        }
+
+        .cmd { color: var(--accent); font-weight: bold; }
+        .success { color: #50fa7b; }
+        .cursor { display: inline-block; width: 8px; height: 18px; background: var(--accent); animation: blink 1s infinite; vertical-align: middle; }
+
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 100px;
+        }
+
+        .card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .card h3 { margin: 0 0 15px; color: #fff; }
+        .card p { color: #888; margin: 0; font-size: 0.95rem; }
+
+        footer {
+            padding: 80px 0 40px;
+            text-align: center;
+            color: #444;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <a href="#" class="logo">
+            <div class="logo-icon">🦎</div>
+            Termizard
+        </a>
+        <div style="font-family: 'JetBrains Mono'; font-size: 0.9rem;">v0.1.0-alpha</div>
+    </header>
+
+    <section class="hero">
+        <h1>Termizard</h1>
+        <p>Высокопроизводительный эмулятор терминала нового поколения, написанный на Go с рендерингом на GPU.</p>
+
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+            </div>
+            <div class="terminal-body">
+                <div><span class="cmd">❯</span> termizard --status</div>
+                <div style="margin: 10px 0;">
+                    [<span class="success">DONE</span>] PTY spawn (creack/pty)<br>
+                    [<span class="success">DONE</span>] Stream Reader & UTF-8 Sync<br>
+                    [<span class="success">DONE</span>] VTE Parser & Grid Update<br>
+                    [<span class="success">DONE</span>] Console Test Output
+                </div>
+                <div><span class="cmd">❯</span> Building Stage 2: GPU Rendering...<span class="cursor"></span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="card">
+            <h3>VTE Parser</h3>
+            <p>Собственный парсер управляющих последовательностей на основе конечного автомата. Поддержка цветов, стилей и очистки экрана.</p>
+        </div>
+        <div class="card">
+            <h3>Cross-Platform PTY</h3>
+            <p>Унифицированный интерфейс для работы с псевдотерминалами в Unix (creack/pty) и Windows (ConPTY).</p>
+        </div>
+        <div class="card">
+            <h3>GPU Accelerated</h3>
+            <p>Архитектура, разделяющая логику терминала и отрисовку, обеспечивающая частоту кадров 60+ FPS.</p>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 Termizard Project. Built with Go & Gio.
+    </footer>
+</div>
+
+</body>
+</html>
