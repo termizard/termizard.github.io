@@ -6,10 +6,14 @@
     --border: rgba(255, 255, 255, 0.1);
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     background-color: var(--bg);
     color: var(--text);
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     margin: 0;
     line-height: 1.6;
     overflow-x: hidden;
@@ -22,7 +26,8 @@ body {
 }
 
 /* Header */
-header {
+
+.header {
     padding: 40px 0;
     display: flex;
     justify-content: space-between;
@@ -30,7 +35,7 @@ header {
 }
 
 .logo {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: "JetBrains Mono", monospace;
     font-weight: 800;
     font-size: 1.5rem;
     color: var(--accent);
@@ -52,6 +57,27 @@ header {
     box-shadow: 0 0 20px rgba(125, 95, 255, 0.4);
 }
 
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.github-link {
+    font-family: "JetBrains Mono", monospace;
+    color: var(--text);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: 0.2s ease;
+}
+
+.github-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
 .lang-switch button {
     background: none;
     border: 1px solid var(--border);
@@ -59,21 +85,29 @@ header {
     padding: 6px 12px;
     border-radius: 6px;
     cursor: pointer;
-    font-family: 'JetBrains Mono';
+    font-family: "JetBrains Mono";
     margin-left: 6px;
+    transition: 0.2s ease;
 }
+
 .lang-switch button:hover {
     border-color: var(--accent);
     color: var(--accent);
 }
 
+.lang-switch button.active {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
 /* Hero */
+
 .hero {
-    padding: 100px 0;
+    padding: 80px 0 40px;
     text-align: center;
 }
 
-h1 {
+.hero h1 {
     font-size: clamp(2.5rem, 8vw, 4.5rem);
     font-weight: 800;
     margin: 0;
@@ -90,11 +124,12 @@ h1 {
 }
 
 /* Terminal */
+
 .terminal-window {
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     border: 1px solid var(--border);
     border-radius: 12px;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(10px);
     max-width: 800px;
     margin: 0 auto;
@@ -110,30 +145,57 @@ h1 {
     border-bottom: 1px solid var(--border);
 }
 
-.dot { width: 12px; height: 12px; border-radius: 50%; }
-.red { background: #ff5f56; }
-.yellow { background: #ffbd2e; }
-.green { background: #27c93f; }
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+.red {
+    background: #ff5f56;
+}
+.yellow {
+    background: #ffbd2e;
+}
+.green {
+    background: #27c93f;
+}
 
 .terminal-body {
     padding: 25px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: "JetBrains Mono", monospace;
     font-size: 0.95rem;
     color: #a9b7c6;
 }
 
-.cmd { color: var(--accent); font-weight: bold; }
-.success { color: #50fa7b; }
-.cursor { display: inline-block; width: 8px; height: 18px; background: var(--accent); animation: blink 1s infinite; vertical-align: middle; }
+.cmd {
+    color: var(--accent);
+    font-weight: bold;
+}
+.success {
+    color: #50fa7b;
+}
+.cursor {
+    display: inline-block;
+    width: 8px;
+    height: 18px;
+    background: var(--accent);
+    animation: blink 1s infinite;
+    vertical-align: middle;
+}
 
-@keyframes blink { 50% { opacity: 0; } }
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
 
 /* Features */
+
 .features {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
-    margin-top: 100px;
+    margin-top: 80px;
 }
 
 .card {
@@ -141,31 +203,30 @@ h1 {
     border: 1px solid var(--border);
     padding: 30px;
     border-radius: 16px;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-.card:hover { transform: translateY(-5px); border-color: var(--accent); }
-.card h3 { margin: 0 0 15px; color: #fff; }
-.card p { color: #888; margin: 0; font-size: 0.95rem; }
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+}
+
+.card h3 {
+    margin: 0 0 15px;
+    color: #fff;
+}
+
+.card p {
+    color: #888;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* Footer */
 
 footer {
     padding: 80px 0 40px;
     text-align: center;
     color: #444;
     font-size: 0.9rem;
-}
-
-.github-link {
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--text);
-    text-decoration: none;
-    border: 1px solid var(--border);
-    padding: 6px 12px;
-    border-radius: 6px;
-    transition: 0.2s ease;
-}
-
-.github-link:hover {
-    color: var(--accent);
-    border-color: var(--accent);
 }

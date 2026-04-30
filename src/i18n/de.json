@@ -1,0 +1,20 @@
+{
+  "heroTitle": "Termizard",
+  "heroDesc": "Ein leistungsstarker Terminal-Emulator der nächsten Generation, geschrieben in Go mit GPU-Rendering.",
+  "terminalHtml": "<div><span class=\"cmd\">❯</span> termizard --status</div><div style=\"margin: 10px 0;\">[<span class=\"success\">DONE</span>] PTY-Start (creack/pty)<br>[<span class=\"success\">DONE</span>] Stream Reader & UTF-8 Sync<br>[<span class=\"success\">DONE</span>] VTE Parser & Grid Update<br>[<span class=\"success\">DONE</span>] Konsolenausgabe-Test</div><div><span class=\"cmd\">❯</span> Baue Phase 2: GPU Rendering...<span class=\"cursor\"></span></div>",
+  "features": [
+    {
+      "title": "VTE Parser",
+      "desc": "Eigener Parser für Steuersequenzen basierend auf endlichen Automaten."
+    },
+    {
+      "title": "Cross-Platform PTY",
+      "desc": "Einheitliche Schnittstelle für Pseudo-Terminals unter Unix und Windows."
+    },
+    {
+      "title": "GPU Accelerated",
+      "desc": "Architektur trennt Logik und Rendering für über 60 FPS."
+    }
+  ],
+  "footer": "© 2026 Termizard Projekt. Entwickelt mit Go & Gio."
+}

@@ -1,0 +1,7 @@
+services:
+  termizard-landing:
+    build: .
+    container_name: termizard-landing
+    ports:
+      - "8080:80"
+    restart: unless-stopped
