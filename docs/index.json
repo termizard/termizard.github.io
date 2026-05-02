@@ -1,1 +1,62 @@
-[]
+[
+  {
+    "path": "intro1.de.html",
+    "title": "Einführung",
+    "headings": [
+      {
+        "depth": 1,
+        "text": "Einführung"
+      },
+      {
+        "depth": 2,
+        "text": "Über das Projekt"
+      },
+      {
+        "depth": 2,
+        "text": "Schnellstart"
+      }
+    ],
+    "lang": "de",
+    "group": "intro1"
+  },
+  {
+    "path": "intro1.en.html",
+    "title": "Introduction",
+    "headings": [
+      {
+        "depth": 1,
+        "text": "Introduction"
+      },
+      {
+        "depth": 2,
+        "text": "About the project"
+      },
+      {
+        "depth": 2,
+        "text": "Quick start"
+      }
+    ],
+    "lang": "en",
+    "group": "intro1"
+  },
+  {
+    "path": "intro1.ru.html",
+    "title": "Введение",
+    "headings": [
+      {
+        "depth": 1,
+        "text": "Введение"
+      },
+      {
+        "depth": 2,
+        "text": "О проекте"
+      },
+      {
+        "depth": 2,
+        "text": "Быстрый старт"
+      }
+    ],
+    "lang": "ru",
+    "group": "intro1"
+  }
+]
