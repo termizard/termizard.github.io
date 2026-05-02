@@ -14,6 +14,10 @@
       {
         "depth": 2,
         "text": "Schnellstart"
+      },
+      {
+        "depth": 1,
+        "text": "Test1"
       }
     ],
     "lang": "de",
@@ -34,6 +38,10 @@
       {
         "depth": 2,
         "text": "Quick start"
+      },
+      {
+        "depth": 1,
+        "text": "Test1"
       }
     ],
     "lang": "en",
@@ -58,5 +66,41 @@
     ],
     "lang": "ru",
     "group": "intro1"
+  },
+  {
+    "path": "test2.de.html",
+    "title": "#TODO",
+    "headings": [
+      {
+        "depth": 1,
+        "text": "#TODO"
+      }
+    ],
+    "lang": "de",
+    "group": "test2"
+  },
+  {
+    "path": "test2.en.html",
+    "title": "#TODO",
+    "headings": [
+      {
+        "depth": 1,
+        "text": "#TODO"
+      }
+    ],
+    "lang": "en",
+    "group": "test2"
+  },
+  {
+    "path": "test2.ru.html",
+    "title": "#TODO",
+    "headings": [
+      {
+        "depth": 1,
+        "text": "#TODO"
+      }
+    ],
+    "lang": "ru",
+    "group": "test2"
   }
 ]
