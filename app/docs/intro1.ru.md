@@ -17,3 +17,5 @@ git clone https://github.com/your/repo.git
 cd repo
 npm ci
 npm run dev
+```
+
