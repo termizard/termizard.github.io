@@ -1,21 +1,26 @@
 {
   "heroTitle": "Termizard",
-  "heroDesc": "Высокопроизводительный эмулятор терминала нового поколения, написанный на Go с рендерингом на GPU.",
+  "heroDesc": "Высокопроизводительный эмулятор терминала следующего поколения на Go с GPU‑рендерингом.",
   "terminalHtml": "<div><span class=\"cmd\">❯</span> termizard --status</div><div style=\"margin: 10px 0;\">[<span class=\"success\">DONE</span>] PTY spawn (creack/pty)<br>[<span class=\"success\">DONE</span>] Stream Reader & UTF-8 Sync<br>[<span class=\"success\">DONE</span>] VTE Parser & Grid Update<br>[<span class=\"success\">DONE</span>] Console Test Output</div><div><span class=\"cmd\">❯</span> Building Stage 2: GPU Rendering...<span class=\"cursor\"></span></div>",
-  "menu": { "home": "Домой", "docs": "Документация" },
+  "menu": { "home": "Главная", "docs": "Docs" },
   "features": [
-    {
-      "title": "VTE Parser",
-      "desc": "Собственный парсер управляющих последовательностей на основе конечного автомата."
-    },
-    {
-      "title": "Cross-Platform PTY",
-      "desc": "Унифицированный интерфейс для работы с псевдотерминалами в Unix и Windows."
-    },
-    {
-      "title": "GPU Accelerated",
-      "desc": "Архитектура, разделяющая логику терминала и отрисовку, обеспечивающая 60+ FPS."
-    }
+    { "title": "VTE Parser", "desc": "Кастомный парсер конечного автомата для управляющих последовательностей." },
+    { "title": "Cross-Platform PTY", "desc": "Единый интерфейс для псевдо‑терминалов на Unix и Windows." },
+    { "title": "GPU Accelerated", "desc": "Архитектура, разделяющая логику и рендеринг для 60+ FPS." }
   ],
-  "footer": "© 2026 Termizard Project. Built with Go & Gio."
+  "footer": "© 2026 Termizard Project. Built with Go & Gio.",
+  "docs": {
+    "backHome": "На главную",
+    "title": "Документация",
+    "selectDocument": "Выберите документ",
+    "errorTitle": "Ошибка",
+    "errorMessage": "Не удалось загрузить страницу документации.",
+    "closeSidebar": "Закрыть",
+    "navigation": "Навигация по документации",
+    "notFound": "Документация не найдена",
+    "toggleSidebar": "Открыть меню"
+  },
+  "github": { "aria": "Открыть репозиторий на GitHub" },
+  "nav": { "aria": "Главная навигация" },
+  "lang": { "aria": "Переключение языка" }
 }

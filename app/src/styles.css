@@ -378,3 +378,126 @@ footer {
     .panel-inner { padding: 20px; }
     .header { position: absolute; top: 10px; }
 }
+
+/* Docs panel (integrate with landing) */
+
+.site-panel { background: transparent; } /* allow panel look consistent */
+
+.docs-root { min-height: 64vh; display:flex; gap:20px; align-items:flex-start; padding: 18px 0; }
+.docs-sidebar {
+    width: 300px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+    max-height: calc(100vh - 140px);
+    overflow:auto;
+    flex: 0 0 300px;
+}
+
+/* header inside sidebar */
+.docs-sidebar-header { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:8px; }
+.docs-sidebar-header strong { font-size:0.98rem; color:var(--text); }
+.close-btn { background:transparent; border:0; color:var(--muted); cursor:pointer; padding:6px; border-radius:8px; }
+.close-btn:hover { color:var(--text); background: rgba(255,255,255,0.02); }
+
+/* nav */
+.docs-nav { display:block; }
+.docs-section { margin-bottom:8px; }
+.docs-link {
+    display:block;
+    padding:8px 10px;
+    color:var(--muted);
+    text-decoration:none;
+    border-radius:8px;
+    font-weight:600;
+    transition: all 160ms ease;
+}
+.docs-link:hover { color:var(--text); background: rgba(125,95,255,0.04); transform: translateY(-1px); }
+.docs-section.active > .docs-link {
+    background: linear-gradient(90deg, rgba(125,95,255,0.12), rgba(95,176,255,0.03));
+    border: 1px solid rgba(125,95,255,0.08);
+    color: var(--text);
+    box-shadow: 0 8px 24px rgba(125,95,255,0.06);
+}
+
+/* subsections */
+.docs-subs { margin-left:10px; margin-top:6px; }
+.docs-sub-link {
+    display:block;
+    padding:6px 8px;
+    color:var(--muted);
+    font-size:0.95rem;
+    text-decoration:none;
+    border-radius:6px;
+}
+.docs-sub-link:hover { color:var(--text); background: rgba(255,255,255,0.02); }
+
+/* content area */
+.docs-content { flex:1; padding: 8px 12px; }
+.docs-toolbar { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:8px; }
+.docs-article {
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+    padding: 22px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.03);
+    color: var(--text);
+    line-height: 1.7;
+    max-width: 980px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* headings inside article */
+.docs-article h1, .docs-article h2, .docs-article h3 {
+    color: var(--text);
+    margin-top: 1.2em;
+    margin-bottom: 0.6em;
+    line-height: 1.15;
+}
+.docs-article h1 { font-size: 1.8rem; }
+.docs-article h2 { font-size: 1.2rem; color: #dfe6ff; }
+.docs-article p { color: var(--muted); margin-bottom: 1em; }
+
+/* code blocks and pre */
+.docs-article pre, .docs-article code {
+    background: rgba(0,0,0,0.6);
+    color: #cfe8ff;
+    padding: 10px;
+    border-radius: 8px;
+    overflow:auto;
+    border: 1px solid rgba(255,255,255,0.02);
+}
+
+/* small helper classes */
+.muted { color: var(--muted); font-size:0.95rem; padding:8px; }
+.btn-ghost { background:transparent; border:1px solid rgba(255,255,255,0.04); color:var(--text); padding:6px 10px; border-radius:8px; cursor:pointer; }
+.btn-ghost:hover { background: rgba(125,95,255,0.06); transform: translateY(-1px); }
+
+/* responsive: mobile sidebar slide-in */
+@media (max-width: 900px) {
+    .docs-root { flex-direction: column; }
+    .docs-sidebar {
+        position: fixed;
+        left: 12px;
+        top: 72px;
+        bottom: 12px;
+        width: 84%;
+        max-width: 360px;
+        transform: translateX(-110%);
+        transition: transform .22s ease;
+        z-index: 2200;
+    }
+    .docs-sidebar.open { transform: translateX(0); }
+    .docs-content { padding: 12px; }
+    .docs-article { padding: 16px; }
+}
+
+/* accessibility: focus states */
+.docs-link:focus, .docs-sub-link:focus, .close-btn:focus, .btn-ghost:focus {
+    outline: 2px solid rgba(125,95,255,0.18);
+    outline-offset: 2px;
+}
+
+/* small utility to match header spacing */
+.docs-sidebar-header .btn-ghost { padding:6px 8px; font-size:0.95rem; }
