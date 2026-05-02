@@ -17,7 +17,6 @@ export default function App() {
 
     return (
         <ReactLenis root options={{ lerp: 0.1, duration: 1.2 }}>
-            {/* Индикатор прогресса */}
             <motion.div className="scroll-progress" style={{ scaleX }} />
 
             <div className="app-wrapper site-root">

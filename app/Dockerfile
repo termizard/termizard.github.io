@@ -8,6 +8,7 @@ RUN npm install
 RUN npm install react react-dom
 RUN npm install @studio-freight/react-lenis framer-motion
 RUN npm install -D @types/react @types/react-dom
+RUN npm install i18next react-i18next i18next-browser-languagedetector
 
 COPY . .
 

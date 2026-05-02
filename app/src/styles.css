@@ -97,6 +97,44 @@ html.lenis { height: auto; }
     transition: all 160ms ease;
 }
 .nav-link:hover, .nav-link:focus { color:var(--text); background:rgba(255,255,255,0.02); outline:none; }
+/* nav buttons (GitHub-like but custom icons) */
+.nav-buttons { display:flex; gap:10px; align-items:center; margin-right:8px; }
+
+.nav-btn {
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 12px;
+    border-radius:10px;
+    text-decoration:none;
+    color:var(--text);
+    background: transparent;
+    border:1px solid rgba(255,255,255,0.04);
+    transition: all 160ms ease;
+    font-weight:600;
+}
+
+.nav-btn:hover, .nav-btn:focus {
+    background: rgba(125,95,255,0.06);
+    border-color: rgba(125,95,255,0.12);
+    color: var(--text);
+    transform: translateY(-1px);
+    outline: none;
+}
+
+.nav-icon {
+    display:inline-block;
+    width:16px;
+    height:16px;
+    flex: 0 0 16px;
+    color: var(--accent);
+}
+
+/* make GitHub button visually consistent with nav buttons */
+.github-btn { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:10px; }
+
+/* ensure label spacing */
+.btn-label { font-size:0.95rem; line-height:1; }
 
 /* actions (github + lang) */
 .header-actions { display:flex; align-items:center; gap:12px; margin-left:8px; }
@@ -106,6 +144,15 @@ html.lenis { height: auto; }
 .btn-ghost { background:transparent; border:1px solid rgba(255,255,255,0.04); color:var(--text); }
 .github-icon { opacity:0.95; display:inline-block; vertical-align:middle; }
 .btn-label { display:inline-block; font-size:0.95rem; }
+
+/* active state for nav buttons */
+.nav-btn.active {
+    background: linear-gradient(90deg, rgba(125,95,255,0.14), rgba(95,176,255,0.06));
+    border-color: rgba(125,95,255,0.18);
+    color: var(--text);
+    box-shadow: 0 8px 24px rgba(125,95,255,0.08);
+    transform: translateY(-1px);
+}
 
 /* language switch */
 .lang-switch { display:flex; gap:8px; align-items:center; }
