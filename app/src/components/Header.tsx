@@ -11,12 +11,42 @@ export default function Header() {
     const brand = t("heroTitle", "Termizard");
 
     const [open, setOpen] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
     const [, setTick] = useState(0);
+
+    // Синхронизация языка
     useEffect(() => {
         const onChange = () => setTick((s) => s + 1);
         i18n.on("languageChanged", onChange);
         return () => i18n.off("languageChanged", onChange);
     }, [i18n]);
+
+    // Логика скрытия хидера при скролле
+    useEffect(() => {
+        const controlHeader = () => {
+            const currentScrollY = window.scrollY;
+
+            // Если открыто мобильное меню, не скрываем хидер
+            if (open) {
+                setIsVisible(true);
+                return;
+            }
+
+            // Скрываем при скролле вниз (если прокрутили больше 100px)
+            // Показываем при скролле вверх
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                setIsVisible(false);
+            } else {
+                setIsVisible(true);
+            }
+
+            setLastScrollY(currentScrollY);
+        };
+
+        window.addEventListener("scroll", controlHeader, { passive: true });
+        return () => window.removeEventListener("scroll", controlHeader);
+    }, [lastScrollY, open]);
 
     const changeLang = async (code: string) => {
         await i18n.changeLanguage(code);
@@ -39,19 +69,6 @@ export default function Header() {
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
-    function scrollToId(id: string) {
-        if (!id) return;
-        const el = document.getElementById(id);
-        if (el) {
-            el.scrollIntoView({ behavior: "smooth", block: "start" });
-            return;
-        }
-        setTimeout(() => {
-            const el2 = document.getElementById(id);
-            if (el2) el2.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 120);
-    }
-
     function handleDocsToggle(e: React.MouseEvent) {
         e.preventDefault();
         setOpen(false);
@@ -59,21 +76,22 @@ export default function Header() {
         const currentHash = window.location.hash || "#home";
         const onDocs = currentHash.startsWith("#docs");
 
-        if (onDocs) {
-            // nope
-        } else {
+        if (!onDocs) {
             window.location.hash = "#docs";
-
+            const scrollTarget = 0;
             if (lenis && typeof lenis.scrollTo === "function") {
-                setTimeout(() => lenis.scrollTo(0), 60);
+                setTimeout(() => lenis.scrollTo(scrollTarget), 60);
             } else {
-                setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 60);
+                setTimeout(() => window.scrollTo({ top: scrollTarget, behavior: "smooth" }), 60);
             }
         }
     }
 
     return (
-        <header className="header" role="banner">
+        <header
+            className={`header ${!isVisible ? "header--hidden" : ""}`}
+            role="banner"
+        >
             <div className="header-left">
                 <a href="#home" className="logo" aria-label={brand} onClick={scrollToTop}>
                     <div className="logo-icon" aria-hidden>
@@ -88,12 +106,11 @@ export default function Header() {
                 role="navigation"
                 aria-label={t("nav.aria", "Main navigation")}
             >
-                <div className="nav-buttons" role="menubar" aria-label={t("nav.aria", "Main navigation")}>
+                <div className="nav-buttons" role="menubar">
                     <a
                         href="#home"
                         className={`btn btn-ghost nav-btn ${activeId === "home" ? "active" : ""}`}
                         aria-current={activeId === "home" ? "page" : undefined}
-                        aria-label={t("menu.home", "Home")}
                         onClick={(e) => {
                             e.preventDefault();
                             scrollToTop(e);
@@ -110,7 +127,6 @@ export default function Header() {
                         href="#docs"
                         className={`btn btn-ghost nav-btn ${activeId === "docs" ? "active" : ""}`}
                         aria-current={activeId === "docs" ? "page" : undefined}
-                        aria-label={t("menu.docs", "Docs")}
                         onClick={handleDocsToggle}
                     >
                         <svg className="nav-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden>
@@ -129,7 +145,6 @@ export default function Header() {
                         className="btn btn-ghost github-btn"
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={t("github.aria", "Open GitHub repository")}
                     >
                         <svg className="github-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden>
                             <path
@@ -140,7 +155,7 @@ export default function Header() {
                         <span className="btn-label">GitHub</span>
                     </a>
 
-                    <div className="lang-switch" role="tablist" aria-label={t("lang.aria", "Language switch")}>
+                    <div className="lang-switch" role="tablist">
                         {(["ru", "en", "de"] as const).map((code) => (
                             <button
                                 key={code}
@@ -148,7 +163,6 @@ export default function Header() {
                                 aria-selected={code === current}
                                 className={`lang-btn ${code === current ? "active" : ""}`}
                                 onClick={() => changeLang(code)}
-                                title={code.toUpperCase()}
                             >
                                 {code.toUpperCase()}
                             </button>
@@ -159,13 +173,13 @@ export default function Header() {
 
             <button
                 className={`hamburger ${open ? "is-open" : ""}`}
-                aria-label={open ? t("menu.close", "Close menu") : t("menu.open", "Open menu")}
+                aria-label={open ? t("menu.close") : t("menu.open")}
                 aria-expanded={open}
                 onClick={() => setOpen((s) => !s)}
             >
-        <span className="hamburger-box">
-          <span className="hamburger-inner" />
-        </span>
+                <span className="hamburger-box">
+                    <span className="hamburger-inner" />
+                </span>
             </button>
         </header>
     );
