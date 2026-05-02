@@ -1,4 +1,3 @@
-// src/components/Header.tsx
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useLenis } from "@studio-freight/react-lenis";
