@@ -1,25 +1,5 @@
 [
   {
-    "path": "intro.de.html",
-    "title": "Einführung",
-    "headings": [
-      {
-        "depth": 1,
-        "text": "Einführung"
-      },
-      {
-        "depth": 2,
-        "text": "Über das Projekt"
-      },
-      {
-        "depth": 2,
-        "text": "Schnellstart"
-      }
-    ],
-    "lang": "de",
-    "group": "intro"
-  },
-  {
     "path": "intro.en.html",
     "title": "Introduction",
     "headings": [
@@ -37,26 +17,6 @@
       }
     ],
     "lang": "en",
-    "group": "intro"
-  },
-  {
-    "path": "intro.ru.html",
-    "title": "Введение",
-    "headings": [
-      {
-        "depth": 1,
-        "text": "Введение"
-      },
-      {
-        "depth": 2,
-        "text": "О проекте"
-      },
-      {
-        "depth": 2,
-        "text": "Быстрый старт"
-      }
-    ],
-    "lang": "ru",
     "group": "intro"
   }
 ]
