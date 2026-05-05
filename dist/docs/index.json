@@ -1,0 +1,106 @@
+[
+  {
+    "path": "intro1.de.html",
+    "title": "Einführung",
+    "headings": [
+      {
+        "depth": 1,
+        "text": "Einführung"
+      },
+      {
+        "depth": 2,
+        "text": "Über das Projekt"
+      },
+      {
+        "depth": 2,
+        "text": "Schnellstart"
+      },
+      {
+        "depth": 1,
+        "text": "Test1"
+      }
+    ],
+    "lang": "de",
+    "group": "intro1"
+  },
+  {
+    "path": "intro1.en.html",
+    "title": "Introduction",
+    "headings": [
+      {
+        "depth": 1,
+        "text": "Introduction"
+      },
+      {
+        "depth": 2,
+        "text": "About the project"
+      },
+      {
+        "depth": 2,
+        "text": "Quick start"
+      },
+      {
+        "depth": 1,
+        "text": "Test1"
+      }
+    ],
+    "lang": "en",
+    "group": "intro1"
+  },
+  {
+    "path": "intro1.ru.html",
+    "title": "Введение",
+    "headings": [
+      {
+        "depth": 1,
+        "text": "Введение"
+      },
+      {
+        "depth": 2,
+        "text": "О проекте"
+      },
+      {
+        "depth": 2,
+        "text": "Быстрый старт"
+      }
+    ],
+    "lang": "ru",
+    "group": "intro1"
+  },
+  {
+    "path": "test2.de.html",
+    "title": "#TODO",
+    "headings": [
+      {
+        "depth": 1,
+        "text": "#TODO"
+      }
+    ],
+    "lang": "de",
+    "group": "test2"
+  },
+  {
+    "path": "test2.en.html",
+    "title": "#TODO",
+    "headings": [
+      {
+        "depth": 1,
+        "text": "#TODO"
+      }
+    ],
+    "lang": "en",
+    "group": "test2"
+  },
+  {
+    "path": "test2.ru.html",
+    "title": "#TODO",
+    "headings": [
+      {
+        "depth": 1,
+        "text": "#TODO"
+      }
+    ],
+    "lang": "ru",
+    "group": "test2"
+  }
+]
