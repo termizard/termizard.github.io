@@ -5,20 +5,14 @@
     "context": ".."
   },
 
-  // Монтируем корень проекта в /workspace, а рабочей папкой делаем app
   "workspaceFolder": "/workspace/app",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
 
-  // Отдельный том для node_modules, чтобы не терять их и не замедлять
   "mounts": [
     "source=react-node-modules,target=/workspace/app/node_modules,type=volume"
   ],
 
-  // Команды, которые выполняются при создании контейнера
   "postCreateCommand": "npm install",
-
-  // Автоматически запускаем dev-сервер при старте (и держим контейнер)
-  "postStartCommand": "nohup npm start > /tmp/react-dev.log 2>&1 &",
 
   "forwardPorts": [3000],
 
