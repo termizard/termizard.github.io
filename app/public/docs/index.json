@@ -1,0 +1,332 @@
+[
+  {
+    "version": "0.0.1",
+    "isLatest": false,
+    "docs": [
+      {
+        "path": "0.0.1/intro1.de.html",
+        "title": "Einführung",
+        "headings": [
+          {
+            "depth": 1,
+            "text": "Einführung"
+          },
+          {
+            "depth": 2,
+            "text": "Über das Projekt"
+          },
+          {
+            "depth": 2,
+            "text": "Schnellstart"
+          },
+          {
+            "depth": 1,
+            "text": "Test1"
+          }
+        ],
+        "lang": "de",
+        "group": "intro1"
+      },
+      {
+        "path": "0.0.1/intro1.en.html",
+        "title": "Introduction",
+        "headings": [
+          {
+            "depth": 1,
+            "text": "Introduction"
+          },
+          {
+            "depth": 2,
+            "text": "About the project"
+          },
+          {
+            "depth": 2,
+            "text": "Quick start"
+          },
+          {
+            "depth": 1,
+            "text": "Test1"
+          }
+        ],
+        "lang": "en",
+        "group": "intro1"
+      },
+      {
+        "path": "0.0.1/intro1.ru.html",
+        "title": "Введение",
+        "headings": [
+          {
+            "depth": 1,
+            "text": "Введение"
+          },
+          {
+            "depth": 2,
+            "text": "О проекте"
+          },
+          {
+            "depth": 2,
+            "text": "Быстрый старт"
+          }
+        ],
+        "lang": "ru",
+        "group": "intro1"
+      },
+      {
+        "path": "0.0.1/test2.de.html",
+        "title": "#Änderungsübersicht",
+        "headings": [
+          {
+            "depth": 1,
+            "text": "#Änderungsübersicht"
+          }
+        ],
+        "lang": "de",
+        "group": "test2"
+      },
+      {
+        "path": "0.0.1/test2.en.html",
+        "title": "#Changelog",
+        "headings": [
+          {
+            "depth": 1,
+            "text": "#Changelog"
+          }
+        ],
+        "lang": "en",
+        "group": "test2"
+      },
+      {
+        "path": "0.0.1/test2.ru.html",
+        "title": "#Список изменений",
+        "headings": [
+          {
+            "depth": 1,
+            "text": "#Список изменений"
+          }
+        ],
+        "lang": "ru",
+        "group": "test2"
+      }
+    ]
+  },
+  {
+    "version": "0.0.2",
+    "isLatest": false,
+    "docs": [
+      {
+        "path": "0.0.2/intro1.de.html",
+        "title": "Einführung",
+        "headings": [
+          {
+            "depth": 1,
+            "text": "Einführung"
+          },
+          {
+            "depth": 2,
+            "text": "Über das Projekt"
+          },
+          {
+            "depth": 2,
+            "text": "Schnellstart"
+          },
+          {
+            "depth": 1,
+            "text": "Test1"
+          }
+        ],
+        "lang": "de",
+        "group": "intro1"
+      },
+      {
+        "path": "0.0.2/intro1.en.html",
+        "title": "Introduction",
+        "headings": [
+          {
+            "depth": 1,
+            "text": "Introduction"
+          },
+          {
+            "depth": 2,
+            "text": "About the project"
+          },
+          {
+            "depth": 2,
+            "text": "Quick start"
+          },
+          {
+            "depth": 1,
+            "text": "Test1"
+          }
+        ],
+        "lang": "en",
+        "group": "intro1"
+      },
+      {
+        "path": "0.0.2/intro1.ru.html",
+        "title": "Введение",
+        "headings": [
+          {
+            "depth": 1,
+            "text": "Введение"
+          },
+          {
+            "depth": 2,
+            "text": "О проекте"
+          },
+          {
+            "depth": 2,
+            "text": "Быстрый старт"
+          }
+        ],
+        "lang": "ru",
+        "group": "intro1"
+      },
+      {
+        "path": "0.0.2/test2.de.html",
+        "title": "#Änderungsübersicht",
+        "headings": [
+          {
+            "depth": 1,
+            "text": "#Änderungsübersicht"
+          }
+        ],
+        "lang": "de",
+        "group": "test2"
+      },
+      {
+        "path": "0.0.2/test2.en.html",
+        "title": "#Changelog",
+        "headings": [
+          {
+            "depth": 1,
+            "text": "#Changelog"
+          }
+        ],
+        "lang": "en",
+        "group": "test2"
+      },
+      {
+        "path": "0.0.2/test2.ru.html",
+        "title": "#Список изменений",
+        "headings": [
+          {
+            "depth": 1,
+            "text": "#Список изменений"
+          }
+        ],
+        "lang": "ru",
+        "group": "test2"
+      }
+    ]
+  },
+  {
+    "version": "0.0.3",
+    "isLatest": true,
+    "docs": [
+      {
+        "path": "0.0.3/intro1.de.html",
+        "title": "Einführung",
+        "headings": [
+          {
+            "depth": 1,
+            "text": "Einführung"
+          },
+          {
+            "depth": 2,
+            "text": "Über das Projekt"
+          },
+          {
+            "depth": 2,
+            "text": "Schnellstart"
+          },
+          {
+            "depth": 1,
+            "text": "Test1"
+          }
+        ],
+        "lang": "de",
+        "group": "intro1"
+      },
+      {
+        "path": "0.0.3/intro1.en.html",
+        "title": "Introduction",
+        "headings": [
+          {
+            "depth": 1,
+            "text": "Introduction"
+          },
+          {
+            "depth": 2,
+            "text": "About the project"
+          },
+          {
+            "depth": 2,
+            "text": "Quick start"
+          },
+          {
+            "depth": 1,
+            "text": "Test1"
+          }
+        ],
+        "lang": "en",
+        "group": "intro1"
+      },
+      {
+        "path": "0.0.3/intro1.ru.html",
+        "title": "Введение",
+        "headings": [
+          {
+            "depth": 1,
+            "text": "Введение"
+          },
+          {
+            "depth": 2,
+            "text": "О проекте"
+          },
+          {
+            "depth": 2,
+            "text": "Быстрый старт"
+          }
+        ],
+        "lang": "ru",
+        "group": "intro1"
+      },
+      {
+        "path": "0.0.3/test2.de.html",
+        "title": "#Änderungsübersicht",
+        "headings": [
+          {
+            "depth": 1,
+            "text": "#Änderungsübersicht"
+          }
+        ],
+        "lang": "de",
+        "group": "test2"
+      },
+      {
+        "path": "0.0.3/test2.en.html",
+        "title": "#Changelog",
+        "headings": [
+          {
+            "depth": 1,
+            "text": "#Changelog"
+          }
+        ],
+        "lang": "en",
+        "group": "test2"
+      },
+      {
+        "path": "0.0.3/test2.ru.html",
+        "title": "#Список изменений",
+        "headings": [
+          {
+            "depth": 1,
+            "text": "#Список изменений"
+          }
+        ],
+        "lang": "ru",
+        "group": "test2"
+      }
+    ]
+  }
+]

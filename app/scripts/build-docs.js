@@ -34,6 +34,35 @@ function extractHeadingsFromMarkdown(md) {
     return headings;
 }
 
+function parseDocFilename(base, relPathInsideVersion) {
+    const parts = base.split('.');
+    if (parts.length >= 3) {
+        const ext = parts.pop(); // md
+        const lang = parts.pop(); // ru/en/de
+        const name = parts.join('.'); // test2 or intro1
+        const group = path.join(path.dirname(relPathInsideVersion), name).replace(/\\/g, '/');
+        return { group, lang };
+    } else {
+        const nameNoExt = base.replace(/\.md$/, '');
+        const group = path.join(path.dirname(relPathInsideVersion), nameNoExt).replace(/\\/g, '/');
+        return { group, lang: defaultLang };
+    }
+}
+
+function compareVersions(v1, v2) {
+    const p1 = v1.split('.').map(Number);
+    const p2 = v2.split('.').map(Number);
+    for (let i = 0; i < 3; i++) {
+        if ((p1[i] || 0) > (p2[i] || 0)) return 1;
+        if ((p1[i] || 0) < (p2[i] || 0)) return -1;
+    }
+    return 0;
+}
+
+function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
 async function copyAssets() {
     const all = await fg(path.join(DOCS_DIR, '**/*').replace(/\\/g, '/'), { dot: true, onlyFiles: false });
     for (const p of all) {
@@ -57,55 +86,80 @@ async function copyAssets() {
         const mdParser = new MarkdownIt({ html: true, linkify: true, typographer: true })
             .use(markdownItAnchor, { slugify, permalink: false });
 
-        const pattern = path.join(DOCS_DIR, '**/*.md').replace(/\\/g, '/');
-        const files = await fg(pattern);
-        const index = [];
+        // We clean out the old public/docs build folder to remove any remaining junk.
+        await fs.rm(OUT_DIR, { recursive: true, force: true });
+        await ensureDir(OUT_DIR);
 
-        // Utility function: parses a filename into {group, lang, filename}
-        // Supports: name.lang.md and name.md
-        function parseDocFilename(rel) {
-            const base = path.basename(rel); // e.g. intro.ru.md or guide/intro.en.md
-            const parts = base.split('.');
-            if (parts.length >= 3) {
-                // last is md, penultimate is lang
-                const ext = parts.pop(); // md
-                const lang = parts.pop(); // ru/en/de
-                const name = parts.join('.'); // intro or guide.part
-                const group = path.join(path.dirname(rel), name).replace(/\\/g, '/'); // relative path without lang and ext
-                return { group, lang, filename: rel };
-            } else {
-                // name.md (no lang)
-                const nameNoExt = base.replace(/\.md$/, '');
-                const group = path.join(path.dirname(rel), nameNoExt).replace(/\\/g, '/');
-                return { group, lang: defaultLang, filename: rel };
-            }
+        // 1. Getting and sorting version folders
+        const dirEntries = await fs.readdir(DOCS_DIR, { withFileTypes: true });
+        const versions = dirEntries
+            .filter(entry => entry.isDirectory() && /^\d+\.\d+\.\d+$/.test(entry.name))
+            .map(entry => entry.name)
+            .sort(compareVersions);
+
+        if (versions.length === 0) {
+            console.warn('No version folders (e.g. X.Y.Z) found in docs/ directory.');
+            process.exit(0);
         }
 
-        for (const file of files) {
-            const rel = path.relative(DOCS_DIR, file).replace(/\\/g, '/'); // e.g. guide/intro.ru.md
-            const meta = parseDocFilename(rel);
-            const raw = await fs.readFile(file, 'utf8');
-            const md = String(raw || '');
+        console.log('Found sorted versions:', versions);
 
-            // extract headings for index (H1..H6)
-            const headings = extractHeadingsFromMarkdown(md);
-            const h1 = headings.find(h => h.depth === 1);
-            const title = h1 ? h1.text : path.basename(file, '.md');
+        const indexJson = [];
+        // Virtual file state storage for inheritance: Map(key -> fileMetadata)
+        // key: "group/lang" (for example, "test2/en")
+        let virtualFileSystem = new Map();
 
-            // render HTML body
-            const htmlBody = mdParser.render(md);
+        // 2. We go sequentially from the smaller version to the larger one.
+        for (let i = 0; i < versions.length; i++) {
+            const version = versions[i];
+            const versionSrcDir = path.join(DOCS_DIR, version);
+            const versionOutDir = path.join(OUT_DIR, version);
+            await ensureDir(versionOutDir);
 
-            // write HTML file: keep language in filename, e.g. intro.ru.html
-            const outPath = path.join(OUT_DIR, rel).replace(/\.md$/, '.html');
-            await ensureDir(path.dirname(outPath));
+            // We search all .md files inside a specific version folder
+            const pattern = path.join(versionSrcDir, '**/*.md').replace(/\\/g, '/');
+            const files = await fg(pattern);
 
-            const pageHtml = `<!doctype html>
+            // We overlay new/modified files of the current version onto our virtual storage
+            for (const file of files) {
+                const relPathInsideVersion = path.relative(versionSrcDir, file).replace(/\\/g, '/'); // например, "test2.en.md"
+                const base = path.basename(relPathInsideVersion);
+                const { group, lang } = parseDocFilename(base, relPathInsideVersion);
+                
+                const key = `${group}/${lang}`;
+                virtualFileSystem.set(key, {
+                    absoluteSourcePath: file,
+                    relPathInsideVersion,
+                    group,
+                    lang
+                });
+            }
+
+            const currentVersionDocs = [];
+
+            // 3. We compile all files that are relevant for this version (including legacy ones)
+            for (const [key, meta] of virtualFileSystem.entries()) {
+                const raw = await fs.readFile(meta.absoluteSourcePath, 'utf8');
+                const md = String(raw || '');
+
+                const headings = extractHeadingsFromMarkdown(md);
+                const h1 = headings.find(h => h.depth === 1);
+                const title = h1 ? h1.text : path.basename(meta.absoluteSourcePath, '.md');
+
+                const htmlBody = mdParser.render(md);
+                
+                // Save path: public/docs/[version]/[relative path].html
+                const outHtmlRelPath = meta.relPathInsideVersion.replace(/\.md$/, '.html');
+                const outPath = path.join(versionOutDir, outHtmlRelPath);
+                await ensureDir(path.dirname(outPath));
+
+                const pageHtml = `<!doctype html>
 <html lang="${meta.lang}">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>${escapeHtml(title)}</title>
-<link rel="stylesheet" href="/docs/styles/docs.css">
+<link rel="stylesheet" href="styles/docs.css">
 </head>
 <body>
 <main class="docs-article">
@@ -114,34 +168,33 @@ ${htmlBody}
 </body>
 </html>`;
 
-            await fs.writeFile(outPath, pageHtml, 'utf8');
+                await fs.writeFile(outPath, pageHtml, 'utf8');
 
-            // normalize headings for index.json
-            const normalizedHeadings = (headings || []).map(h => ({ depth: Number(h.depth || 0), text: String(h.text || '') }));
+                const normalizedHeadings = headings.map(h => ({ depth: Number(h.depth || 0), text: String(h.text || '') }));
 
-            // push index entry with language and group
-            index.push({
-                path: rel.replace(/\.md$/, '.html'), // path to HTML relative to /docs/
-                title: String(title || rel),
-                headings: normalizedHeadings,
-                lang: meta.lang,
-                group: meta.group // base name used to group translations
+                currentVersionDocs.push({
+                    path: `${version}/${outHtmlRelPath}`, // relative path from /public/docs/
+                    title: String(title),
+                    headings: normalizedHeadings,
+                    lang: meta.lang,
+                    group: meta.group
+                });
+            }
+
+            // Add the version and its document list to the index.json array.
+            indexJson.push({
+                version: version,
+                isLatest: i === versions.length - 1, // The most recent version in the array is marked as Latest
+                docs: currentVersionDocs
             });
         }
 
-        // copy assets (images etc.)
-        await copyAssets();
+        // We write the final structured version index
+        await fs.writeFile(path.join(OUT_DIR, 'index.json'), JSON.stringify(indexJson, null, 2), 'utf8');
+        console.log(`Successfully compiled documentation for ${versions.length} versions!`);
 
-        await ensureDir(OUT_DIR);
-        await fs.writeFile(path.join(OUT_DIR, 'index.json'), JSON.stringify(index, null, 2), 'utf8');
-
-        console.log('Docs built:', index.length, 'files ->', OUT_DIR);
     } catch (err) {
         console.error('build-docs error:', err);
         process.exit(1);
     }
 })();
-
-function escapeHtml(s) {
-    return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-}
