@@ -17,9 +17,22 @@ export default function Docs() {
 
     // keep component aware of current UI language from header
     useEffect(() => {
-        // when header changes language via i18n, this effect will run (i18n.language is reactive)
-        // we don't store it in local state; we read i18n.language where needed
-    }, [i18n.language]);
+        if (!selected || list.length === 0) return;
+        
+        const uiLang = i18n.language || defaultLang;
+
+        // If the currently selected document is already in the desired language, do nothing.
+        if (selected.lang === uiLang) return;
+
+        // We search for a document from the same group, but in a newly selected language
+        const newDoc = list.find((item) => item.group === selected.group && item.lang === uiLang);
+
+        if (newDoc) {
+            setSelected(newDoc);
+            // We synchronize the hash in the address bar so that the file path is also updated there.
+            window.location.hash = `#docs/${encodeURIComponent(newDoc.path)}`;
+        }
+    }, [i18n.language, list]); // <-- We are monitoring language changes and updating the list of documents.
 
     useEffect(() => {
         fetch("/docs/index.json")
